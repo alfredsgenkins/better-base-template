@@ -1,0 +1,110 @@
+// =====================================================================================================================
+// Colors
+// =====================================================================================================================
+
+$fc-primary: #e0dcd7;
+$fc-accent: #6abee0;
+
+// =====================================================================================================================
+// Media Breakpoint
+// =====================================================================================================================
+
+// DESCRIPTION: This creates a mixin 'media', which can be called on breakpoint alias param.
+
+// EXAMPLE: you can use media-breakpoints in your SCSS like this: @include media(desktop) { ... content in desktop breakpoint scope ... }
+
+$enable-breakpoints: true; // True to use preset breakpoints
+$media-breakpoints: m mobile null 1023px, d desktop 1024px null; // List of media breakpoints formatted as list — ([bp. prefix] [bp. alias] [bp. min-width] [bp. max-width])
+
+// =====================================================================================================================
+// Custom Column
+// =====================================================================================================================
+
+// DESCRIPTION: This creates a col-[column size] classes, like bootstrap does. If you check 'column-breakpoints' variable, you will get an ability to use different col-[column size] inside your breakpoints scope. They are called like so: [bp. prefix]-col-[column size].
+
+// NOTE: columns should always be wrapped in rows (.row), and in one row there should be no more columns inside of one row than in 'column-count' variable defined columns.
+
+// EXAMPLE: you can use columns in your template like this: <div class="row"><div class="col-6 gap-3"> ... if 'column-count' is set to 12, then this content takes exactly 50% of the parent (.row) element, and is padded (has a gap) 25% from the parent width ... </div></div>
+
+$enable-columns: true; // True to use preset columns
+$column-gaps: true; // True to use column gaps
+$column-count: 12; // Number of columns inside of row
+$custom-columns: one-fifth 20%,; // List of custom columns — ([col. alias] [col. width])
+$column-breakpoints: true; // True to make columns and gaps responsive*
+
+// *make responsive — add media breakpoint to an element (as prefix)
+
+// =====================================================================================================================
+// Margin & Padding
+// =====================================================================================================================
+
+// DESCRIPTION: This creates a margin/padding preset (of classes). By switching 'mp-vertical-horizontal' on, you will get an ability to set 'margin/padding-vertical' or 'margin/padding-horizontal'. You should use this class like this: [margin or padding]-[m/p. direction (or null)]-[m/p. size alias]. After switching 'mp-breakpoints' you get ability to work inside of a breakpoint scope: [bp. prefix]-[margin or padding]-[m/p. direction (or null)]-[m/p. size alias].
+
+// EXAMPLE: <div class="margin-left-4xl"> ... element has a margin-left: 35px applied  ... </div>
+
+$enable-mp: true; // True to use preset margin and padding
+$mp-sizes: none 0, xs 3px, s 5px, m 10px, l 15px, xl 20px, 2xl 25px, 3xl 30px, 4xl 35px, 5xl 40px, 6xl 45px, 7xl 50px, huge 80px; // List of preset margin and padding sizes — ([size alias] [size])
+$mp-vertical-horizontal: true; // True to add vertical and horizontal m/p.
+$mp-breakpoints: true; // True to make m/p responsive*
+
+// *make responsive — add media breakpoint to an element (as prefix)
+
+// =====================================================================================================================
+// Text Formatting
+// =====================================================================================================================
+
+$enable-tf: true; // True to use preset text formatting
+$tf-font-faces: 'Open Sans' '/assets/fonts/OpenSans/OpenSans-Light.ttf' 300 null, 'Barlow' '/assets/fonts/Barlow/Barlow-Medium.ttf' 300 null; // List of font-faces — ([font-family] [path to font] [font-weight - optional] [font-style - optional])
+
+// DESCRIPTION: This creates a font-family preset (of classes). You should use font-family preset like this: ff-[f-f. alias]. If 'tf-font-family-alias-breakpoints' is enabled, you can set font-family in defined media breakpoint scope: [bp. prefix]-ff-[f-f. alias].
+
+// EXAMPLE: <div class="ff-primary"> ... this text will have font-family 'Open Sans' ... </div>
+
+$tf-enable-font-family-alias: true; // True to use preset font-family
+$tf-font-family-aliases: primary 'Open Sans', secondary 'Barlow'; // List of preset font-family — ([f-f. alias] [f-f. name])
+$tf-font-family-alias-breakpoints: true; // True to make f-f. responsive*
+
+
+// DESCRIPTION: This creates a font-size preset (of classes). You should use font-size preset like this: fs-[f-s. size alias]. If 'tf-font-size-breakpoints' is enabled, you can set font-size in defined media breakpoint scope: [bp. prefix]-fs-[f-s. size alias].
+
+// EXAMPLE: <div class="fs-xl"> ... this text will have font-size 18px ... </div>
+
+$tf-enable-font-size: true; // True to use preset font sizes
+$tf-font-sizes: xs 8px, s 10px, m 12px, l 15px, xl 18px, 2xl 20px, 3xl 25px, 4xl 30px, 5xl 35px; // List of preset font-size — ([f-s. alias] [f-s. size])
+$tf-font-size-breakpoints: true; // True to make f-s. responsive*
+$tf-enable-font-size-responsive: true; // Make text responsive
+$tf-font-size-responsive-breakpoints: mobile,; // Which breakpoints are making text responsive
+
+// DESCRIPTION: This creates a font-weight preset (of classes). You should use font-weight preset like this: fw-[f-c. weight alias]. If 'tf-font-weight-breakpoints' is enabled, you can set weight in defined media breakpoint scope: [bp. prefix]-fw-[f-c. weight alias].
+
+// EXAMPLE: <div class="fw-semibold"> ... this text will have font-weight 600 ... </div>
+
+$tf-enable-font-weight: true; // True to use preset font weight
+$tf-font-weights: bold 700, semibold 600, light 300; // List of font-weight — ([f-w. alias] [f-w. weight])
+$tf-font-weight-breakpoints: false; // True to make f-w. responsive*
+
+// DESCRIPTION: This creates a font color preset (of classes). You should use font color preset like this: fc-[f-c. color alias]. If 'tf-font-color-breakpoints' is enabled, you can set color in defined media breakpoint scope: [bp. prefix]-fc-[f-c. color alias].
+
+// EXAMPLE: <div class="fc-primary"> ... this text will have color #E0DCD7 ... </div>
+
+$tf-enable-font-color: true; // True to use preset font color
+$tf-font-colors: primary $fc-primary, accent $fc-accent; // List of color — ([f-c. alias] [f-c. color])
+$tf-font-color-breakpoints: false; // True to make f-c. responsive*
+
+// DESCRIPTION: This creates a line-height preset. You should always use line-height preset like this: flh-[line-height alias]. If 'tf-line-height-breakpoints' is enabled, you can set line-height in defined breakpoint scope: [bp. prefix]-flh-[line-height alias].
+
+// EXAMPLE: <div class="flh-xl" ... this text will have 2.16 line-height ... </div>
+
+$tf-enable-line-height: true; // True to use preset line-height
+$tf-line-heights: xs 1, s 1.21, m 1.4, l 1.81, xl 2.16; // List of l-h. — ([l-h. alias] [l-h.. line-height])
+$tf-line-height-breakpoints: true; // True to make l-h. responsive*
+
+// DESCRIPTION: This creates a text-transform preset. You should always use text-transform preset like this: ft-[t-t. alias]. If 'tf-transforms-breakpoints' is enabled, you can set text-transform in defined breakpoint scope: [bp. prefix]-ft-[text-transform alias].
+
+// EXAMPLE: <div class="ft-up" ... this text will have text-transform UPPERCASE ... </div>
+
+$tf-enable-transform: true; // True to use preset text-transform
+$tf-transforms: up uppercase, low lowercase; // List of t-t. — ([t-t. alias] [t-t.. transform])
+$tf-transforms-breakpoints: false; // True to make t-t. responsive*
+
+// *make responsive — add media breakpoint to an element (as prefix)

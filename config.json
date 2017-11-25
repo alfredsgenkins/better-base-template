@@ -1,0 +1,17 @@
+{
+  "banner" : [
+    "/**",
+    " * ╔════╦═╤═╤═╗ <%= pkg.name %> - <%= pkg.description %>",
+    " * ║  ──╢ │ │ ║ @version v<%= pkg.version %>",
+    " * ╟──  ║     ║ @link <%= pkg.homepage %>",
+    " * ╚════╩══╧══╝ @license <%= pkg.license %>",
+    " */"
+  ],
+  "autoprefixer": {
+    "browsers": ["last 2 versions"],
+    "cascade": false
+  },
+  "linter": {
+    "config": "linter.yml"
+  }
+}

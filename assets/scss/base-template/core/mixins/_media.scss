@@ -1,0 +1,32 @@
+@mixin media ($breakpoint) {
+    $breakpoint-exists: false;
+
+    @if $enable-breakpoints {
+        @each $media-breakpoint in $media-breakpoints {
+            @if nth($media-breakpoint, 2) == $breakpoint {
+                $breakpoint-exists: true;
+                @if nth($media-breakpoint, 3) {
+                    @if nth($media-breakpoint, 4) {
+                        @media (min-width: #{nth($media-breakpoint, 3)}) and (max-width: #{nth($media-breakpoint, 4)}) {
+                            @content;
+                        }
+                    } @else {
+                        @media (min-width: #{nth($media-breakpoint, 3)}) {
+                            @content;
+                        }
+                    }
+                } @else {
+                    @media (max-width: #{nth($media-breakpoint, 4)}) {
+                        @content;
+                    }
+                }
+            }
+        }
+
+        @if not $breakpoint-exists {
+            @warn 'You are trying to access media breakpoint which does not exist.';
+        }
+    } @else {
+        @warn 'To use media breakpoints, please set $enable-breakpoints to true in config.';
+    }
+}
