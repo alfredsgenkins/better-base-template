@@ -35,3 +35,25 @@ gulp watch
 #### How to change an application environment?
 
 If you want **Autoprefixer** and **Css Minifier** to work (they do in **production** mode only): `gulp --mode=prod watch`
+
+## Usage
+
+> If you have no preset values for the element, you should not extend this element with a functionality not preset. Example:
+
+```css
+button {
+    // note: element is not extended by %mp (margin-padding)
+    background-color: $c-primary;
+}
+```
+
+```css
+button {
+    @extend %mp;
+    // note: element is extended by %mp (margin-padding), 
+       because it has a preset value which should be overwritten.
+    
+    background-color: $c-primary;
+    padding: 10px 5px;
+}
+```

@@ -1,23 +1,23 @@
  @if $enable-mp {
      %mp {
         @each $mp-size in $mp-sizes {
-            .margin-#{nth($mp-size, 1)} {
+            &.margin-#{nth($mp-size, 1)} {
                 margin: #{nth($mp-size, 2)};
             }
 
-            .padding-#{nth($mp-size, 1)} {
+            &.padding-#{nth($mp-size, 1)} {
                 padding: #{nth($mp-size, 2)};
             }
 
             @if $mp-breakpoints {
                 @each $media-breakpoint in $media-breakpoints {
-                    .#{nth($media-breakpoint, 1)}-margin-#{nth($mp-size, 1)} {
+                    &.#{nth($media-breakpoint, 1)}-margin-#{nth($mp-size, 1)} {
                         @include media(#{nth($media-breakpoint, 2)}) {
                             margin: #{nth($mp-size, 2)};
                         }
                     }
 
-                    .#{nth($media-breakpoint, 1)}-padding-#{nth($mp-size, 1)} {
+                    &.#{nth($media-breakpoint, 1)}-padding-#{nth($mp-size, 1)} {
                         @include media(#{nth($media-breakpoint, 2)}) {
                             padding: #{nth($mp-size, 2)};
                         }
@@ -26,50 +26,50 @@
             }
 
             @if $mp-vertical-horizontal {
-                .margin-horizontal-#{nth($mp-size, 1)} {
+                &.margin-horizontal-#{nth($mp-size, 1)} {
                     margin-left: #{nth($mp-size, 2)};
                     margin-right: #{nth($mp-size, 2)};
                 }
 
-                .margin-vertical-#{nth($mp-size, 1)} {
+                &.margin-vertical-#{nth($mp-size, 1)} {
                     margin-bottom: #{nth($mp-size, 2)};
                     margin-top: #{nth($mp-size, 2)};
                 }
 
-                .padding-horizontal-#{nth($mp-size, 1)} {
+                &.padding-horizontal-#{nth($mp-size, 1)} {
                     padding-left: #{nth($mp-size, 2)};
                     padding-right: #{nth($mp-size, 2)};
                 }
 
-                .padding-vertical-#{nth($mp-size, 1)} {
+                &.padding-vertical-#{nth($mp-size, 1)} {
                     padding-bottom: #{nth($mp-size, 2)};
                     padding-top: #{nth($mp-size, 2)};
                 }
 
                 @if $mp-breakpoints {
                     @each $media-breakpoint in $media-breakpoints {
-                        .#{nth($media-breakpoint, 1)}-margin-horizontal-#{nth($mp-size, 1)} {
+                        &.#{nth($media-breakpoint, 1)}-margin-horizontal-#{nth($mp-size, 1)} {
                             @include media(#{nth($media-breakpoint, 2)}) {
                                 margin-left: #{nth($mp-size, 2)};
                                 margin-right: #{nth($mp-size, 2)};
                             }
                         }
 
-                        .#{nth($media-breakpoint, 1)}-margin-vertical-#{nth($mp-size, 1)} {
+                        &.#{nth($media-breakpoint, 1)}-margin-vertical-#{nth($mp-size, 1)} {
                             @include media(#{nth($media-breakpoint, 2)}) {
                                 margin-bottom: #{nth($mp-size, 2)};
                                 margin-top: #{nth($mp-size, 2)};
                             }
                         }
 
-                        .#{nth($media-breakpoint, 1)}-padding-horizontal-#{nth($mp-size, 1)} {
+                        &.#{nth($media-breakpoint, 1)}-padding-horizontal-#{nth($mp-size, 1)} {
                             @include media(#{nth($media-breakpoint, 2)}) {
                                 padding-left: #{nth($mp-size, 2)};
                                 padding-right: #{nth($mp-size, 2)};
                             }
                         }
 
-                        .#{nth($media-breakpoint, 1)}-padding-vertical-#{nth($mp-size, 1)} {
+                        &.#{nth($media-breakpoint, 1)}-padding-vertical-#{nth($mp-size, 1)} {
                             @include media(#{nth($media-breakpoint, 2)}) {
                                 padding-bottom: #{nth($mp-size, 2)};
                                 padding-top: #{nth($mp-size, 2)};
@@ -82,23 +82,23 @@
             $mp-directions: left, right, top, bottom;
 
             @each $mp-direction in $mp-directions {
-                .margin-#{$mp-direction}-#{nth($mp-size, 1)} {
+                &.margin-#{$mp-direction}-#{nth($mp-size, 1)} {
                     margin-#{$mp-direction}: #{nth($mp-size, 2)};
                 }
 
-                .padding-#{$mp-direction}-#{nth($mp-size, 1)} {
+                &.padding-#{$mp-direction}-#{nth($mp-size, 1)} {
                     padding-#{$mp-direction}: #{nth($mp-size, 2)};
                 }
 
                 @if $mp-breakpoints {
                     @each $media-breakpoint in $media-breakpoints {
-                        .#{nth($media-breakpoint, 1)}-margin-#{$mp-direction}-#{nth($mp-size, 1)} {
+                        &.#{nth($media-breakpoint, 1)}-margin-#{$mp-direction}-#{nth($mp-size, 1)} {
                             @include media(#{nth($media-breakpoint, 2)}) {
                                 margin-#{$mp-direction}: #{nth($mp-size, 2)};
                             }
                         }
 
-                        .#{nth($media-breakpoint, 1)}-padding-#{$mp-direction}-#{nth($mp-size, 1)} {
+                        &.#{nth($media-breakpoint, 1)}-padding-#{$mp-direction}-#{nth($mp-size, 1)} {
                             @include media(#{nth($media-breakpoint, 2)}) {
                                 padding-#{$mp-direction}: #{nth($mp-size, 2)};
                             }
