@@ -42,7 +42,10 @@ If you want **Autoprefixer** and **Css Minifier** to work (they do in **producti
 
 ```css
 button {
-    // note: element is not extended by %mp (margin-padding)
+    /** 
+     *  note: element is not extended by %mp (margin-padding)
+     */
+      
     background-color: $c-primary;
 }
 ```
@@ -50,8 +53,11 @@ button {
 ```css
 button {
     @extend %mp;
-    // note: element is extended by %mp (margin-padding), 
-       because it has a preset value which should be overwritten.
+    
+    /** 
+     *  note: element is extended by %mp (margin-padding), 
+     *  because it has a preset value which should be overwritten.
+     */
     
     background-color: $c-primary;
     padding: 10px 5px;
