@@ -4,8 +4,6 @@ A base-template generator with awesome gulp configuration!
 
 ## Features
 
-#### Overview
-
 - Base template:
     - Generates preset margin or padding 
     - Generates Bootsrap like column system
