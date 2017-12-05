@@ -8,8 +8,13 @@
 @import 'core/parts/columns';
 
 * {
-    @extend %mp;
-    @extend %tf;
+    @if $enable-mp {
+        @extend %mp;
+    }
+
+    @if $enable-tf {
+        @extend %tf;
+    }
 
     box-sizing: border-box;
     margin: 0;

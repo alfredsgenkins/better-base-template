@@ -1,5 +1,5 @@
- @if $enable-mp {
-     %mp {
+%mp {
+    @if $enable-mp {
         @each $mp-size in $mp-sizes {
             &.margin-#{nth($mp-size, 1)} {
                 margin: #{nth($mp-size, 2)};
@@ -107,5 +107,7 @@
                 }
             }
         }
+    } @else {
+        @warn 'You are trying to access %mp extend which is not enabled. Please set $enable-mp to true, before using this.';
     }
 }

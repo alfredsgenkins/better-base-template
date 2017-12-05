@@ -38,7 +38,9 @@ If you want **Autoprefixer** and **Css Minifier** to work (they do in **producti
 
 ## Usage
 
-> If you have no preset values for the element, you should not extend this element with a functionality not preset. Example:
+> If you have no preset values for the element, you should not extend this element with a functionality not preset. 
+
+Example:
 
 ```css
 button {

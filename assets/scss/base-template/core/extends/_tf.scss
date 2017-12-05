@@ -11,8 +11,10 @@
             }
         }
     }
+}
 
-    %tf {
+%tf {
+    @if $enable-tf {
         @if $tf-enable-font-family-alias {
             @each $tf-font-family-alias in $tf-font-family-aliases {
                 &.ff-#{nth($tf-font-family-alias, 1)} {
@@ -134,5 +136,7 @@
                 }
             }
         }
+    } @else {
+        @warn 'You are trying to access %tf extend which is not enabled. Please set $enable-tf to true, before using this.';
     }
 }
