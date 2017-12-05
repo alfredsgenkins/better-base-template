@@ -1,0 +1,13 @@
+@import 'core/config';
+
+@import 'core/mixins/media';
+
+@import 'core/parts/tf';
+@import 'core/parts/mp';
+@import 'core/parts/columns';
+
+* {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}

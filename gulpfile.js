@@ -11,16 +11,20 @@ const gulp = require('gulp'),
     cached = require('gulp-cached'),
     csso = require('gulp-csso'),
     scsslint = require('gulp-scss-lint'),
-    color = require('gulp-color');
+    color = require('gulp-color'),
+    sourcemaps = require('gulp-sourcemaps');
 
-process.env.NODE_ENV = args.prod ? 'prod' : 'dev';
+process.env.NODE_ENV = args.mode || 'dev';
+
 config.linter.customReport = function (file) {
     if (!file.scsslint.success) {
         if (file.scsslint.warnings) {
-            console.log(color('WARNING', 'RED') + ': There ' + (file.scsslint.warnings > 1 ? 'are ' : 'is ') + file.scsslint.warnings + ' ' + (file.scsslint.warnings > 1 ? 'issues' : 'issue') + ' in ' + file.path);
+            console.log('');
+            console.log(color('WARNING', 'RED') + ': There ' + (file.scsslint.warnings > 1 ? 'are ' : 'is ') + color(file.scsslint.warnings, 'CYAN') + ' ' + (file.scsslint.warnings > 1 ? 'issues' : 'issue') + ' in ' + color(file.path, 'MAGENTA'));
             for (var i = 0; i < file.scsslint.issues.length; i++) {
-                console.log('    ' + (i + 1) + ') issue on line: ' + file.scsslint.issues[i].line + ', reason: ' + file.scsslint.issues[i].reason);
+                console.log('    ' + (i + 1) + ') issue on line: ' + color(file.scsslint.issues[i].line, 'CYAN') + ', reason: ' +  color(file.scsslint.issues[i].reason, 'MAGENTA'));
             }
+            console.log('');
         }
 
         delete cached.caches.scss[file.path];
@@ -38,11 +42,11 @@ gulp.task('scss', function() {
         .pipe(gulpif(global.isWatching, cached('scss')))
         .pipe(sassInheritance({base: 'assets/scss/'}))
         .pipe(scsslint(config.linter))
+        .pipe(gulpif(process.env.NODE_ENV === 'dev', sourcemaps.init()))
         .pipe(sass())
+        .pipe(gulpif(process.env.NODE_ENV === 'dev', sourcemaps.write()))
         .pipe(header(config.banner.join('\n').concat('\n\n'),{pkg:pkg}))
         .pipe(gulpif(process.env.NODE_ENV === 'prod', csso()))
         .pipe(gulpif(process.env.NODE_ENV === 'prod', autoprefixer(config.autoprefixer)))
         .pipe(gulp.dest('assets/css'))
 });
-
-//TO DO: implement SCSS lint (https://www.npmjs.com/package/gulp-sass-lint)

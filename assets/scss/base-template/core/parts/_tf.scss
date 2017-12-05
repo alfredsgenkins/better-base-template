@@ -83,14 +83,14 @@
     @if $tf-enable-font-color {
         @each $tf-font-color in $tf-font-colors {
             .fc-#{nth($tf-font-color, 1)} {
-                font-weight: #{nth($tf-font-color, 2)};
+                color: #{nth($tf-font-color, 2)};
             }
 
             @if $tf-font-color-breakpoints {
                 @each $media-breakpoint in $media-breakpoints {
                     .#{nth($media-breakpoint, 1)}-fc-#{nth($tf-font-color, 1)} {
                         @include media(#{nth($media-breakpoint, 2)}) {
-                            font-weight: #{nth($tf-font-color, 2)};
+                            color: #{nth($tf-font-color, 2)};
                         }
                     }
                 }

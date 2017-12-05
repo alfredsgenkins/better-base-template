@@ -28,5 +28,5 @@ gulp watch
 
 If you want **Autoprefixer** and **Css Optimizer** to do their work
 ```
-gulp --prod watch
+gulp --mode=prod watch
 ```
