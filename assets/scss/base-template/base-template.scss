@@ -2,13 +2,17 @@
 
 @import 'core/mixins/media';
 
-@import 'core/parts/tf';
-@import 'core/parts/mp';
+@import 'core/extends/mp';
+@import 'core/extends/tf';
+
 @import 'core/parts/columns';
 
 * {
+    @extend %mp;
+    @extend %tf;
+
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
     position: relative;
-    box-sizing: border-box;
 }

@@ -1,0 +1,138 @@
+@if $enable-tf {
+    %tf {
+        @each $tf-font-face in $tf-font-faces {
+            @font-face {
+                font-family: quote(#{nth($tf-font-face, 1)});
+                src: url(quote(#{ nth($tf-font-face, 2)}));
+                @if nth($tf-font-face, 4) {
+                    font-style: #{nth($tf-font-face, 4)};
+                }
+                @if nth($tf-font-face, 3) {
+                    font-weight: #{nth($tf-font-face, 3)};
+                }
+            }
+        }
+
+        @if $tf-enable-font-family-alias {
+            @each $tf-font-family-alias in $tf-font-family-aliases {
+                .ff-#{nth($tf-font-family-alias, 1)} {
+                    font-family: quote(#{nth($tf-font-family-alias, 2)});
+                }
+
+                @if $tf-font-family-alias-breakpoints {
+                    @each $media-breakpoint in $media-breakpoints {
+                        .#{nth($media-breakpoint, 1)}-ff-#{nth($tf-font-family-alias, 1)} {
+                            @include media(#{nth($media-breakpoint, 2)}) {
+                                font-family: quote(#{nth($tf-font-family-alias, 2)});
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @if $tf-enable-font-size {
+            @each $tf-font-size in $tf-font-sizes {
+                .fs-#{nth($tf-font-size, 1)} {
+                    font-size: #{nth($tf-font-size, 2)};
+                }
+
+                @if $tf-font-size-breakpoints {
+                    @each $media-breakpoint in $media-breakpoints {
+                        .#{nth($media-breakpoint, 1)}-fs-#{nth($tf-font-size, 1)} {
+                            @include media(#{nth($media-breakpoint, 2)}) {
+                                $is-responsive: false;
+
+                                @if $tf-enable-font-size-responsive {
+                                    @each $tf-font-size-responsive-breakpoint in $tf-font-size-responsive-breakpoints {
+                                        @if nth($media-breakpoint, 2) == $tf-font-size-responsive-breakpoint {
+                                            $is-responsive: true;
+                                        }
+                                    }
+                                }
+
+                                @if $is-responsive {
+                                    font-size: calc(#{nth($tf-font-size, 2)} + 8 * ((100vw - 500px) / 1500));
+                                } @else {
+                                    font-size: #{nth($tf-font-size, 2)};
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @if $tf-enable-font-weight {
+            @each $tf-font-weight in $tf-font-weights {
+                .fw-#{nth($tf-font-weight, 1)} {
+                    font-weight: #{nth($tf-font-weight, 2)};
+                }
+
+                @if $tf-font-weight-breakpoints {
+                    @each $media-breakpoint in $media-breakpoints {
+                        .#{nth($media-breakpoint, 1)}-fw-#{nth($tf-font-weight, 1)} {
+                            @include media(#{nth($media-breakpoint, 2)}) {
+                                font-weight: #{nth($tf-font-weight, 2)};
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @if $tf-enable-font-color {
+            @each $tf-font-color in $tf-font-colors {
+                .fc-#{nth($tf-font-color, 1)} {
+                    color: #{nth($tf-font-color, 2)};
+                }
+
+                @if $tf-font-color-breakpoints {
+                    @each $media-breakpoint in $media-breakpoints {
+                        .#{nth($media-breakpoint, 1)}-fc-#{nth($tf-font-color, 1)} {
+                            @include media(#{nth($media-breakpoint, 2)}) {
+                                color: #{nth($tf-font-color, 2)};
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @if $tf-enable-line-height {
+            @each $tf-line-height in $tf-line-heights {
+                .flh-#{nth($tf-line-height, 1)} {
+                    line-height: #{nth($tf-line-height, 2)};
+                }
+
+                @if $tf-line-height-breakpoints {
+                    @each $media-breakpoint in $media-breakpoints {
+                        .#{nth($media-breakpoint, 1)}-flh-#{nth($tf-line-height, 1)} {
+                            @include media(#{nth($media-breakpoint, 2)}) {
+                                line-height: #{nth($tf-line-height, 2)};
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @if $tf-enable-transform {
+            @each $tf-transform in $tf-transforms {
+                .ft-#{nth($tf-transform, 1)} {
+                    text-transform: #{nth($tf-transform, 2)};
+                }
+
+                @if $tf-transforms-breakpoints {
+                    @each $media-breakpoint in $media-breakpoints {
+                        .#{nth($media-breakpoint, 1)}-ft-#{nth($tf-transform, 1)} {
+                            @include media(#{nth($media-breakpoint, 2)}) {
+                                text-transform: #{nth($tf-transform, 2)};
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
