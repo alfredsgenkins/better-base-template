@@ -13,5 +13,19 @@
   },
   "linter": {
     "config": "linter.yml"
+  },
+  "scss": {
+    "src": "assets/scss/",
+    "dest": "assets/css/",
+    "filemask": "**/*.scss"
+  },
+  "browserSync": {
+    "proxy": "your.domain",
+    "logLevel": "warn",
+    "logFileChanges": false
+  },
+  "tasks": {
+    "list": ["scss", "browser-sync"],
+    "default": ["scss"]
   }
 }

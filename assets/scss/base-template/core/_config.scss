@@ -5,6 +5,16 @@
 $fc-primary: #e0dcd7;
 $fc-accent: #6abee0;
 
+$c-primary: #8feda1;
+$c-accent: #aa8840;
+
+// DESCRIPTION: This creates a mixin 'color', which can be used for default colors schemes for elements (buttons, sections, etc.)
+
+// EXAMPLE: you can use colors in your SCSS like this: @include color(primary) { ... content in primary color scheme ... }
+
+$enable-color-scheme: true; // True to use preset color schemes
+$color-schemes: primary, accent; // List of colors in color scheme
+
 // =====================================================================================================================
 // Media Breakpoint
 // =====================================================================================================================

@@ -7,11 +7,12 @@ A base-template generator with awesome gulp configuration!
 - Base template:
     - Generates preset margin or padding 
     - Generates Bootsrap like column system
-    - Generates media mixin
+    - Generates media-breakpoints mixin
+    - Generates color-scheme mixin
     - Generates text formatting: preset* *font-size, font-weight...*
 - Gulp configuration:
     - Beautiful Liner errors output
-    - Fast compilation (scss + linter in less than 1ms)
+    - Fast compilation (scss + linter in less than 1s)
     - Application environment support (development and production)
 
 #### How fast compilation process is achieved?
@@ -34,11 +35,13 @@ gulp watch
 
 #### How to change an application environment?
 
-If you want **Autoprefixer** and **Css Minifier** to work (they do in **production** mode only): `gulp --mode=prod watch`
+> If you want **Autoprefixer** and **Css Minifier** to work (they do in **production** mode only): `gulp --mode=prod`
 
 ## Usage
 
-> If you have no preset values for the element, you should not extend this element with a functionality not preset. 
+#### Text-formatting, Margin-padding?
+
+- If you have no preset values for the element, you should not extend this element with a functionality of mixin.
 
 Example:
 
@@ -63,5 +66,38 @@ button {
     
     background-color: $c-primary;
     padding: 10px 5px;
+}
+```
+
+#### Media breakpoints?
+
+```css
+a {  
+    /** 
+     *  note: you can quickly set element properties in media-breakpoint scope.
+     */
+    
+    font-size: 12px;
+    
+    @include media(mobile) {
+        font-size: 14px;
+    }
+}
+```
+
+#### Color schemes?
+
+```css
+a {  
+    /** 
+     *  note: you can quickly set element properties in color-scheme,
+     *  gulp will generate a.primary { color: red; }.
+     */
+    
+    color: $fc-default;
+    
+    @include color(primary) {
+        color: $fc-primary;
+    }
 }
 ```
