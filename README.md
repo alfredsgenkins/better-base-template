@@ -43,8 +43,6 @@ gulp watch
 
 - If you have no preset values for the element, you should not extend this element with a functionality of mixin.
 
-Example:
-
 ```css
 button {
     /** 
