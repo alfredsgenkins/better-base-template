@@ -16,7 +16,6 @@ const gulp = require('gulp'),
     browserSync = require('browser-sync').create(),
     sassExtract = require('sass-extract'),
     fs = require('fs'),
-    sassbeautify = require('gulp-sassbeautify'),
     gulpFilter = require('gulp-filter');
 
 let linterIgnored = [];
@@ -105,11 +104,6 @@ gulp.task('base-template', function (callback) {
             linterIgnored.push(colorPath);
         }
     });
-
-    /*gulp.src(mixinPath + '**!/!*.scss')
-        .pipe(sassbeautify({indent: 4}))
-        .pipe(header([''].join('\n').concat('\n\n'),{pkg:pkg}))
-        .pipe(gulp.dest(mixinPath));*/
 });
 
 gulp.task('watch', function(callback){

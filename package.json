@@ -26,7 +26,6 @@
     "gulp-header": "^1.8.9",
     "gulp-if": "^2.0.2",
     "gulp-sass": "^3.1.0",
-    "gulp-sassbeautify": "^0.1.0",
     "gulp-scss-lint": "^0.5.0",
     "gulp-sourcemaps": "^2.6.1",
     "run-sequence": "^2.2.0"
