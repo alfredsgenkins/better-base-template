@@ -13,7 +13,13 @@ const gulp = require('gulp'),
     scsslint = require('gulp-scss-lint'),
     color = require('gulp-color'),
     sourcemaps = require('gulp-sourcemaps'),
-    browserSync = require('browser-sync').create();
+    browserSync = require('browser-sync').create(),
+    sassExtract = require('sass-extract'),
+    fs = require('fs'),
+    sassbeautify = require('gulp-sassbeautify'),
+    gulpFilter = require('gulp-filter');
+
+let linterIgnored = [];
 
 process.env.NODE_ENV = args.mode || 'dev';
 
@@ -30,8 +36,84 @@ config.linter.customReport = function (file) {
     }
 };
 
+gulp.task('base-template', function (callback) {
+    let mixinPath = './' + config.scss.src + 'base-template/components/mixins/';
+
+    sassExtract.render({
+        file: './assets/scss/base-template/core/_config.scss'
+    }).then(rendered => {
+        let scssVars = rendered.vars.global;
+        let scssGenerate = {
+            mixin: function (name, params, content) {
+                return '@mixin ' + name + ((params) ? ' (' + params.join(', ') + ')' : '') + ' {' + content + '}';
+            },
+            media: function (minWidth, maxWidth, content) {
+                return '@media ' + ((minWidth) ? '(min-width: ' + minWidth + ')' : '') + ((minWidth && maxWidth) ? 'and' : '') + ((maxWidth) ? '(max-width: ' + maxWidth + ')' : '') + '{' + content + '}';
+            },
+            size: function (size, units) {
+                return size + units;
+            }
+        };
+
+        if (scssVars['$enable-breakpoints'].value) {
+            let mediaMixins = [],
+                mediaPath = mixinPath + '_media.scss';
+
+            scssVars['$media-breakpoints'].value.forEach(function (breakpoint) {
+                mediaMixins.push(
+                    scssGenerate.mixin(
+                        breakpoint.value[1].value,
+                        false,
+                        scssGenerate.media(
+                            scssGenerate.size(
+                                breakpoint.value[2].value,
+                                breakpoint.value[2].unit
+                            ),
+                            scssGenerate.size(
+                                breakpoint.value[3].value,
+                                breakpoint.value[3].unit
+                            ),
+                            '@content;'
+                        )
+                    )
+                );
+            });
+
+            fs.writeFile(mediaPath, mediaMixins.join('\n'), (err) => {
+                if (err) throw err;
+            });
+            linterIgnored.push(mediaPath);
+        }
+
+        if (scssVars['$enable-color-scheme'].value) {
+            let colorMixins = [],
+                colorPath = mixinPath + '_color.scss';
+
+            scssVars['$color-schemes'].value.forEach(function (color) {
+                colorMixins.push(
+                    scssGenerate.mixin(
+                        color.value,
+                        false,
+                        '@content;'
+                    )
+                );
+            });
+
+            fs.writeFile(colorPath, colorMixins.join('\n'), (err) => {
+                if (err) throw err;
+            });
+            linterIgnored.push(colorPath);
+        }
+    });
+
+    /*gulp.src(mixinPath + '**!/!*.scss')
+        .pipe(sassbeautify({indent: 4}))
+        .pipe(header([''].join('\n').concat('\n\n'),{pkg:pkg}))
+        .pipe(gulp.dest(mixinPath));*/
+});
+
 gulp.task('watch', function(callback){
-    runSequence(['scss', 'browser-sync'], callback);
+    runSequence('base-template', config.tasks.list, callback);
     global.isWatching = true;
     gulp.watch(
         config.scss.src + config.scss.filemask,
@@ -45,14 +127,18 @@ gulp.task('watch', function(callback){
 });
 
 gulp.task('default', function () {
-    runSequence(config.tasks.default)
+    runSequence('base-template', config.tasks.default)
 });
 
 gulp.task('scss', function() {
+    let scssFilter = gulpFilter(linterIgnored, {restore: true});
+
     return gulp.src(config.scss.src + config.scss.filemask)
         .pipe(gulpif(global.isWatching, cached('scss')))
         .pipe(sassInheritance({base: config.scss.src}))
+        .pipe(scssFilter)
         .pipe(scsslint(config.linter))
+        .pipe(scssFilter.restore)
         .pipe(gulpif(process.env.NODE_ENV === 'dev', sourcemaps.init()))
         .pipe(sass())
         .pipe(gulpif(process.env.NODE_ENV === 'dev', sourcemaps.write()))

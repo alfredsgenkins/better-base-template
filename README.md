@@ -12,7 +12,8 @@ A base-template generator with awesome gulp configuration!
     - Generates text formatting: preset* *font-size, font-weight...*
 - Gulp configuration:
     - Beautiful Liner errors output
-    - Fast compilation (scss + linter in less than 1s)
+    - Fast compilation (scss + linter tasks in less than 1s)
+    - Basic plugins included (`browser-sync`, `gulp-sourcemaps`)
     - Application environment support (development and production)
 
 #### How fast compilation process is achieved?
@@ -23,6 +24,16 @@ A base-template generator with awesome gulp configuration!
 3) File is being checked by `gulp-scss-lint` (linter):
     1) If file is OK it is being cached.
     2) If file contains issues, it is being removed from cache and passed to a **custom issue reporter**, which is made more awesome by `gulp-color`.
+
+#### How mixin generation works?
+
+- Task `base-template` is responsible for that. 
+
+1) Read SCSS config file (`_config.scss`) with `sass-extract`.
+2) Parses necessary variables, converts them into mixin's name, attributes, content.
+3) Passes parsed data into function, which returns mixin string.
+4) Writes string returned from function in to file using `fs` package.
+5) Adds generated files to filter (so that `gulp-scss-lint`) will not check them.
 
 ## Installing
 
@@ -77,7 +88,7 @@ a {
     
     font-size: 12px;
     
-    @include media(mobile) {
+    @include mobile {
         font-size: 14px;
     }
 }
@@ -94,7 +105,7 @@ a {
     
     color: $fc-default;
     
-    @include color(primary) {
+    @include primary {
         color: $fc-primary;
     }
 }
