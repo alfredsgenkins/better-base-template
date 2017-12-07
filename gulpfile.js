@@ -35,7 +35,7 @@ config.linter.customReport = function (file) {
     }
 };
 
-gulp.task('base-template', function (callback) {
+gulp.task('base-template', function () {
     let mixinPath = './' + config.scss.src + 'base-template/components/mixins/';
 
     sassExtract.render({

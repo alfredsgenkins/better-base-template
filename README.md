@@ -10,6 +10,7 @@ A base-template generator with awesome gulp configuration!
     - Generates media-breakpoints mixin
     - Generates color-scheme mixin
     - Generates text formatting: preset* *font-size, font-weight...*
+    - Preset base element style - **COMING SOON**
 - Gulp configuration:
     - Beautiful Liner errors output
     - Fast compilation (scss + linter tasks in less than 1s)
