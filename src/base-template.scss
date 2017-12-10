@@ -1,0 +1,29 @@
+@import 'core/config';
+
+@import 'core/mixins/media';
+@import 'core/mixins/color';
+
+@import 'core/extends/mp';
+@import 'core/extends/tf';
+
+@import 'core/parts/columns';
+
+@if $enable-mp {
+    @import 'core/mixins/generated/media';
+}
+
+* {
+    @if $enable-mp {
+        @extend %mp;
+
+        margin: 0;
+        padding: 0;
+    }
+
+    @if $enable-tf {
+        @extend %tf;
+    }
+
+    box-sizing: border-box;
+    position: relative;
+}
