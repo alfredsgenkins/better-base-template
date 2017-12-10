@@ -9,7 +9,7 @@
 @import 'core/parts/columns';
 
 @if $enable-mp {
-    @import 'core/mixins/media-generated';
+    @import 'core/mixins/generated/media';
 }
 
 * {

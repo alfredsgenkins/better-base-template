@@ -66,7 +66,7 @@ let parser = {
                     )
                 }
 
-                fs.writeFile(config.mainPath + 'mixins/_media-generated.scss', breakpoints.join('\n'), (err) => {
+                fs.writeFile(config.mainPath + 'mixins/generated/_media.scss', breakpoints.join('\n'), (err) => {
                     if (err) throw err;
                 });
             }
