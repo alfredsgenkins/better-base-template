@@ -1,6 +1,6 @@
 {
   "name": "better-base-template",
-  "version": "1.0.0",
+  "version": "1.0.01",
   "description": "An awesome base-template generator.",
   "main": "./src/index.js",
   "scripts": {
