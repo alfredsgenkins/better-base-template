@@ -1,8 +1,7 @@
 <p align="center">
   <a href="http://gulpjs.com">
-    <img height="100" width="736" src="https://user-images.githubusercontent.com/29531824/33808807-0ac5cdfa-ddf5-11e7-896a-d8bca95a4cde.png">
+    <img height="501" width="668" src="https://user-images.githubusercontent.com/29531824/33809208-e259f0a6-ddfb-11e7-9ce4-e3577bceda45.png">
   </a>
-  <p align="center">An awesome base template generator!</p>
 </p>
 
 ## What is better-base-template?

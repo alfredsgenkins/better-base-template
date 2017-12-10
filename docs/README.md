@@ -1,8 +1,6 @@
-# `Better Base Template` documentation
+# Documentation for `Better Base Template 1.0.3`
 
-This guide is for `better-base-template` version `1.0.3`!
-
-## Installation
+#### How to install the package?
  
 1) Install npm package.
     ```
