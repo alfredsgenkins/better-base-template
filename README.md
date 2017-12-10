@@ -1,6 +1,6 @@
 # Better Base Template
 
-A base-template generator with awesome gulp configuration!
+A base-template generator!
 
 ## Features
 
