@@ -1,17 +1,22 @@
 <p align="center">
-  <a href="http://gulpjs.com">
-    <img height="336" width="574" src="https://user-images.githubusercontent.com/29531824/33828830-4c914bd4-de76-11e7-9d1a-a96d916f084b.png">
-  </a>
+    <img height="187" width="320" src="https://user-images.githubusercontent.com/29531824/33828830-4c914bd4-de76-11e7-9d1a-a96d916f084b.png">
 </p>
 
 ## What is better-base-template?
 
-- **Presets** - better-base-template is a configurable library of element styling presets.
-- **Optimization** - decrease page loading time, increase coding speed by using pre-coded values.
-- **Simplicity** - style pages, by adding classes, not writing a style code!
+- **Library** - better-base-template is a configurable library of element styling presets.
+- **Optimization** - decrease page loading time and increase coding speed by using pre-coded values.
+- **Simplicity** - style pages, by adding classes to an elements, not writing a style code!
+- **Configurability** - configure everything, anyway!
 
-## Documentation
+## What's inside?
+
+- **Layout** - Light weight row-column layout system.
+- **Presets** - Classes for preset margin and padding, text formatting.
+- **Mixins** - Mixins for writing SCSS in media-breakpoint scope.
+
+>  **Coming soon** - basic style for base-elements.
+
+## Documentationxins
 
 Get a full guide in [documentation for the current release](/docs/README.md).
-
-
