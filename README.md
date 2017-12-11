@@ -6,17 +6,17 @@
 
 - **Library** - better-base-template is a configurable library of element styling presets.
 - **Optimization** - decrease page loading time and increase coding speed by using pre-coded values.
-- **Simplicity** - style pages, by adding classes to an elements, not writing a style code!
+- **Simplicity** - style pages, by adding classes to an element, do not write a style code for each!
 - **Configurability** - configure everything, anyway!
 
 ## What's inside?
 
-- **Layout** - Light weight row-column layout system.
-- **Presets** - Classes for preset margin and padding, text formatting.
-- **Mixins** - Mixins for writing SCSS in media-breakpoint scope.
+- **Layout** - light weight row-column layout system.
+- **Presets** - classes for preset margin and padding, text formatting.
+- **Mixins** - mixins for writing SCSS in media-breakpoint scope.
 
 >  **Coming soon** - basic style for base-elements.
 
-## Documentationxins
+## Documentation
 
 Get a full guide in [documentation for the current release](/docs/README.md).
