@@ -1,6 +1,6 @@
 {
   "name": "better-base-template",
-  "version": "1.0.02",
+  "version": "1.0.03",
   "description": "An awesome base-template generator.",
   "main": "./src/index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "base-template",
     "scss",
     "library",
-    "scss"
+    "sass"
   ],
   "author": "Alfred Genkin",
   "license": "ISC"

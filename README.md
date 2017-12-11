@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://gulpjs.com">
-    <img height="501" width="668" src="https://user-images.githubusercontent.com/29531824/33809208-e259f0a6-ddfb-11e7-9ce4-e3577bceda45.png">
+    <img height="336" width="574" src="https://user-images.githubusercontent.com/29531824/33828830-4c914bd4-de76-11e7-9d1a-a96d916f084b.png">
   </a>
 </p>
 
