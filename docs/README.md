@@ -5,7 +5,10 @@
 - [Installation](#installation)
 - [Configuration](#configuration)
     - [Media Breakpoints](#media-breakpoints)
-
+    - [Row & Column layout](#row--column-layout)
+    - [Margin & Padding preset](#margin--padding-preset)
+    - [Font Formatting preset](#font-formatting-preset)
+    
 ## Installation
  
 1) Install npm package.
