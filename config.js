@@ -16,7 +16,7 @@ module.exports = {
         ],
         enableColumns: true,
         columnGaps: true,
-        columnCount: true,
+        columnCount: 12,
         customColumns: [
             {
                 alias: 'one-fifth',
