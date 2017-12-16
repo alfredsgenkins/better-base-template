@@ -1,6 +1,6 @@
-# Documentation for `Better Base Template 1.0.4`
+# Documentation
 
-## Table of content
+## Table of contents
 
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -224,6 +224,83 @@ p {
     - **Default value** - `true`
     - **Description** - Switch for enabling and disabling font-family aliases functionality in scope of media breakpoints.
     - **Example** - `<div class="m-ff-curved">`, media breakpoint prefix + `-` +  font-family alias
+    
+- `tfEnableFontSize`
+    - **Type** - `boolean`
+    - **Default value** - `true`
+    - **Description** - Switch for enabling font-size preset.
+    
+- `tfFontSizes`
+    - **Type** - two-dimensional `array`
+    - **Default value** - `[['xs', '8px'], ['s', '10px'], ['m', '12px'], ['l', '15px'], ['xl', '18px'], ['2xl', '20px'], ['3xl', '25px'], ['4xl', '30px'], ['5xl', '35px']]`
+    - **Template** - `[[font-size alias, font-size], [...]]`
+    - **Description** - List of font-sizes and it's aliases.
+    - **Example** - `<div class="fs-[alias]">`, `fs-` + alias name!
+    
+- `tfFontSizeBreakpoints`
+    - **Type** - `boolean`
+    - **Default value** - `true`
+    - **Description** - Switch for enabling and disabling font-size aliases functionality in scope of media breakpoints.
+    - **Example** - `<div class="m-fs-curved">`, media breakpoint prefix + `-` +  font-size alias
+    
+- `tfEnableFontSizeResponsive`
+    - **Type** - `boolean`
+    - **Default value** - `true`
+    - **Description** - Switch for enabling responsiveness of the font-size.
+    
+- `tfFontSizeResponsiveBreakpoints`
+    - **Type** - `array`
+    - **Default value** - `['mobile']`
+    - **Template** - `[media breakpoint alias, ... ]`
+    - **Description** - List of breakpoints, where font-size should be relative.
+
+- `tfEnableFontWeight`
+    - **Type** - `boolean`
+    - **Default value** - `true`
+    - **Description** - Switch for enabling font-weight preset.
+    
+- `tfFontWeights`
+    - **Type** - two-dimensional `array`
+    - **Default value** - `[['bold', '700'], ['semibold', 600], ['light', 300]]`
+    - **Template** - `[[font-weight alias, font-weight], [...]]`
+    - **Description** - List of font-weights and it's aliases.
+    - **Example** - `<div class="fw-[alias]">`, `fw-` + alias name!
+
+- `tfFontWeightBreakpoints`
+    - **Type** - `boolean`
+    - **Default value** - `true`
+    - **Description** - Switch for enabling and disabling font-weight aliases functionality in scope of media breakpoints.
+    - **Example** - `<div class="m-fw-curved">`, media breakpoint prefix + `-` +  font-weight alias
+
+- `tfEnableFontColor`
+    - **Type** - `boolean`
+    - **Default value** - `true`
+    - **Description** - Switch for enabling text color preset.
+    
+- `tfFontColors`
+    - **Type** - two-dimensional `array`
+    - **Default value** - `false`
+    - **Template** - `[[text color alias, color], [...]]`
+    - **Description** - List of text colors and it's aliases.
+    - **Example** - `<div class="fc-[alias]">`, `fc-` + alias name!
+    
+- `tfFontColorBreakpoints`
+    - **Type** - `boolean`
+    - **Default value** - `false`
+    - **Description** - Switch for enabling and disabling text color aliases functionality in scope of media breakpoints.
+    - **Example** - `<div class="m-fc-curved">`, media breakpoint prefix + `-` +  text color alias
+
+- `tfEnableLineHeight`
+    - **Type** - `boolean`
+    - **Default value** - `true`
+    - **Description** - Switch for enabling line-height preset.
+    
+- `tfLineHeights`
+    - **Type** - two-dimensional `array`
+    - **Default value** - `[['xs', '1'], ['s', '1.21'], ['m', '1.4'], ['l', '1.81'], ['xl', '2.16']]`
+    - **Template** - `[[line-height alias, line-height], [...]]`
+    - **Description** - List of line-heights and it's aliases.
+    - **Example** - `<div class="flh-[alias]">`, `flh-` + alias name!
     
 **DOCUMENTATION IS IN PROGRESS**...
 
