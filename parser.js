@@ -24,21 +24,29 @@ let parser = {
                 let value = parser.options[variable];
 
                 if (typeof(value) === 'object') {
-                    let valueParts = [];
+                    if (Object.keys(value).length > 0) {
+                        let valueParts = [];
 
-                    for (let valuePart in value) {
-                        let valuePartString = '';
+                        for (let valuePart in value) {
+                            let valuePartString = '';
 
-                        if (typeof(value[valuePart]) === 'object') {
-                            valuePartString = valuePartString.concat(Object.values(value[valuePart]).join(' '));
-                        } else {
-                            valuePartString = value[valuePart];
+                            if (typeof(value[valuePart]) === 'object') {
+                                valuePartString = valuePartString.concat(Object.values(value[valuePart]).join(' '));
+                            } else {
+                                valuePartString = value[valuePart];
+                            }
+
+                            valueParts.push(valuePartString);
                         }
 
-                        valueParts.push(valuePartString);
+                        if (valueParts.length > 1) {
+                            value = valueParts.join(', ');
+                        } else {
+                            value = ''.concat(valueParts[0], ', ');
+                        }
+                    } else {
+                        value = '[]';
                     }
-
-                    value = valueParts.join(', ');
                 }
 
                 variables.push(parser.scssGenerate.variable(variable, value));

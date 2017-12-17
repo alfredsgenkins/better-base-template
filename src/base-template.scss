@@ -8,9 +8,7 @@
 
 @import 'core/parts/columns';
 
-@if $enable-mp {
-    @import 'core/mixins/generated/media';
-}
+@import 'core/mixins/generated/media';
 
 * {
     @if $enable-mp {

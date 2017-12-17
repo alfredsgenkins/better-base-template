@@ -16,14 +16,20 @@
     npm install --save-dev better-base-template
     ```
     
-2) Require package and pass your configuration.
+2) Require package and pass your configuration. For example in `index.js`
     ```javascript
     const baseTemplate = require('better-base-template');
     let options = { /** pass your options here */ };
     baseTemplate.init(options);
     ```
     
-3) Import generated styles in your **SCSS**
+3) Initialize better-base-template 
+    ```
+    node index
+    ```
+
+    
+4) Import generated styles in your **SCSS**
 
     ```scss
     @import 'path/to/node_modules/better-base-template/src/base-template'; 
@@ -203,7 +209,7 @@ p {
 
 - `tfFontFaces`
     - **Type** - two-dimensional `array`
-    - **Default value** - `false`
+    - **Default value** - `[]`
     - **Template** - `[[font-family, path to font, font-weight - optional, font-style - optional], [...]]`
     - **Description** - List for generating font-faces.
 
@@ -214,7 +220,7 @@ p {
 
 - `tfFontFamilyAliases`
     - **Type** - two-dimensional `array`
-    - **Default value** - `false`
+    - **Default value** - `[]`
     - **Template** - `[[font-family, alias], [...]]`
     - **Description** - List of font-family and it's aliases.
     - **Example** - `<div class="ff-[alias]">`, `ff-` + alias name!
@@ -279,7 +285,7 @@ p {
     
 - `tfFontColors`
     - **Type** - two-dimensional `array`
-    - **Default value** - `false`
+    - **Default value** - `[]`
     - **Template** - `[[text color alias, color], [...]]`
     - **Description** - List of text colors and it's aliases.
     - **Example** - `<div class="fc-[alias]">`, `fc-` + alias name!

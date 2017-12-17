@@ -82,9 +82,9 @@ module.exports = {
         mpVerticalHorizontal: true,
         mpBreakpoints: true,
         enableTf: false,
-        tfFontFaces: false,
+        tfFontFaces: [],
         tfEnableFontFamilyAlias: true,
-        tfFontFamilyAliases: false,
+        tfFontFamilyAliases: [],
         tfFontFamilyAliasBreakpoints: true,
         tfEnableFontSize: true,
         tfFontSizes: [
@@ -145,7 +145,7 @@ module.exports = {
         ],
         tfFontWeightBreakpoints: true,
         tfEnableFontColor: true,
-        tfFontColors: false,
+        tfFontColors: [],
         tfFontColorBreakpoints: false,
         tfEnableLineHeight: true,
         tfLineHeights: [
