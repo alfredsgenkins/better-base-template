@@ -1,4 +1,4 @@
-# Documentation
+# Documentation 
 
 ## Table of contents
 
@@ -290,6 +290,24 @@ p {
     - **Description** - Switch for enabling and disabling text color aliases functionality in scope of media breakpoints.
     - **Example** - `<div class="m-fc-curved">`, media breakpoint prefix + `-` +  text color alias
 
+- `tfEnableTransform`
+    - **Type** - `boolean`
+    - **Default value** - `true`
+    - **Description** - Switch for enabling text-transform preset.
+    
+- `tfTransforms`
+    - **Type** - two-dimensional `array`
+    - **Default value** - `[['up', 'uppercase'], ['low', 'lowercase']]`
+    - **Template** - `[[text-transform alias, text-transform], [...]]`
+    - **Description** - List of text-transform aliases and it's aliases.
+    - **Example** - `<div class="ft-[alias]">`, `ft-` + alias name!
+
+- `tfTransformsBreakpoints`
+    - **Type** - `boolean`
+    - **Default value** - `false`
+    - **Description** - Switch for enabling and disabling text-transform aliases functionality in scope of media breakpoints.
+    - **Example** - `<div class="m-ft-up">`, media breakpoint prefix + `-` +  text-transform alias
+
 - `tfEnableLineHeight`
     - **Type** - `boolean`
     - **Default value** - `true`
@@ -302,6 +320,4 @@ p {
     - **Description** - List of line-heights and it's aliases.
     - **Example** - `<div class="flh-[alias]">`, `flh-` + alias name!
     
-**DOCUMENTATION IS IN PROGRESS**...
-
 <sup>*</sup> TF - Text Formatting
