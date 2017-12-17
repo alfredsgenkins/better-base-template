@@ -136,7 +136,5 @@
                 }
             }
         }
-    } @else {
-        @warn 'You are trying to access %tf extend which is not enabled. Please set $enable-tf to true, before using this.';
     }
 }

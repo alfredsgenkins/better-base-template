@@ -107,7 +107,5 @@
                 }
             }
         }
-    } @else {
-        @warn 'You are trying to access %mp extend which is not enabled. Please set $enable-mp to true, before using this.';
     }
 }
