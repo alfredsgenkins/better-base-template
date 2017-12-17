@@ -5,7 +5,7 @@ const config = require('./config'),
 
 let betterBaseTempate = {
     init: (options) => {
-        parser.options = Object.assign({}, options, config.options);
+        parser.options = Object.assign({}, config.options, options);
 
         parser.parseConfig.variables();
         parser.parseConfig.breakpoints();

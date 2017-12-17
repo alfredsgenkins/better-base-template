@@ -170,6 +170,7 @@ module.exports = {
                 lineHeight: 2.16
             }
         ],
+        tfLineHeightBreakpoints: false,
         tfEnableTransform: true,
         tfTransforms: [
             {
