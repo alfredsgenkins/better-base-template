@@ -22,3 +22,11 @@
 ## Documentation
 
 Get a full guide in [documentation for the current release](/docs/README.md).
+
+## Notes
+
+We love improving our package! If you have anything to say, leave us [your feedback here](https://github.com/alfredsgenkins/better-base-template/issues/2)!
+
+## Take a read about us:
+
+- 18<sup>th</sup> of December 2017: [Guide on base-template improvement](https://medium.com/@alfreds_26705/how-to-improve-your-base-template-99a381583b89) by Alfreds Genkins
