@@ -1,10 +1,10 @@
+'use strict';
+
 const gulp = require('gulp'),
     sass = require('gulp-sass'),
     runSequence = require('run-sequence'),
     gulpif = require('gulp-if'),
     autoprefixer = require('gulp-autoprefixer'),
-    header = require('gulp-header'),
-    pkg = require('./package.json'),
     config = require('./config.json'),
     sassInheritance = require('gulp-better-sass-inheritance'),
     args = require('get-gulp-args')(),
@@ -14,9 +14,9 @@ const gulp = require('gulp'),
     color = require('gulp-color'),
     sourcemaps = require('gulp-sourcemaps'),
     browserSync = require('browser-sync').create(),
-    sassExtract = require('sass-extract'),
-    fs = require('fs'),
-    gulpFilter = require('gulp-filter');
+    gulpFilter = require('gulp-filter'),
+    notify = require('gulp-notify'),
+    plumber = require('gulp-plumber');
 
 let linterIgnored = [];
 
@@ -35,79 +35,8 @@ config.linter.customReport = function (file) {
     }
 };
 
-gulp.task('base-template', function () {
-    let mixinPath = './' + config.scss.src + 'base-template/components/mixins/';
-
-    sassExtract.render({
-        file: './assets/scss/base-template/core/_config.scss'
-    }).then(rendered => {
-        let scssVars = rendered.vars.global;
-        let scssGenerate = {
-            mixin: function (name, params, content) {
-                return '@mixin ' + name + ((params) ? ' (' + params.join(', ') + ')' : '') + ' {' + content + '}';
-            },
-            media: function (minWidth, maxWidth, content) {
-                return '@media ' + ((minWidth) ? '(min-width: ' + minWidth + ')' : '') + ((minWidth && maxWidth) ? 'and' : '') + ((maxWidth) ? '(max-width: ' + maxWidth + ')' : '') + '{' + content + '}';
-            },
-            size: function (size, units) {
-                return size + units;
-            }
-        };
-
-        if (scssVars['$enable-breakpoints'].value) {
-            let mediaMixins = [],
-                mediaPath = mixinPath + '_media.scss';
-
-            scssVars['$media-breakpoints'].value.forEach(function (breakpoint) {
-                mediaMixins.push(
-                    scssGenerate.mixin(
-                        breakpoint.value[1].value,
-                        false,
-                        scssGenerate.media(
-                            scssGenerate.size(
-                                breakpoint.value[2].value,
-                                breakpoint.value[2].unit
-                            ),
-                            scssGenerate.size(
-                                breakpoint.value[3].value,
-                                breakpoint.value[3].unit
-                            ),
-                            '@content;'
-                        )
-                    )
-                );
-            });
-
-            fs.writeFile(mediaPath, mediaMixins.join('\n'), (err) => {
-                if (err) throw err;
-            });
-            linterIgnored.push(mediaPath);
-        }
-
-        if (scssVars['$enable-color-scheme'].value) {
-            let colorMixins = [],
-                colorPath = mixinPath + '_color.scss';
-
-            scssVars['$color-schemes'].value.forEach(function (color) {
-                colorMixins.push(
-                    scssGenerate.mixin(
-                        color.value,
-                        false,
-                        '@content;'
-                    )
-                );
-            });
-
-            fs.writeFile(colorPath, colorMixins.join('\n'), (err) => {
-                if (err) throw err;
-            });
-            linterIgnored.push(colorPath);
-        }
-    });
-});
-
 gulp.task('watch', function(callback){
-    runSequence('base-template', config.tasks.list, callback);
+    runSequence(config.tasks.list, callback);
     global.isWatching = true;
     gulp.watch(
         config.scss.src + config.scss.filemask,
@@ -121,7 +50,7 @@ gulp.task('watch', function(callback){
 });
 
 gulp.task('default', function () {
-    runSequence('base-template', config.tasks.default)
+    runSequence(config.tasks.default)
 });
 
 gulp.task('scss', function() {
@@ -133,10 +62,15 @@ gulp.task('scss', function() {
         .pipe(scssFilter)
         .pipe(scsslint(config.linter))
         .pipe(scssFilter.restore)
+        .pipe(plumber({ errorHandler: function(err) {
+                notify.onError({
+                    title: "Gulp error in " + err.plugin,
+                    message:  err.toString()
+                })(err);
+            }}))
         .pipe(gulpif(process.env.NODE_ENV === 'dev', sourcemaps.init()))
-        .pipe(sass())
+        .pipe(sass({outputStyle: 'compressed'}))
         .pipe(gulpif(process.env.NODE_ENV === 'dev', sourcemaps.write()))
-        .pipe(header(config.banner.join('\n').concat('\n\n'),{pkg:pkg}))
         .pipe(gulpif(process.env.NODE_ENV === 'prod', csso()))
         .pipe(gulpif(process.env.NODE_ENV === 'prod', autoprefixer(config.autoprefixer)))
         .pipe(gulp.dest(config.scss.dest))

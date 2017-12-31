@@ -1,0 +1,150 @@
+$breakpoint-list: (mobile: (max-width: 599px), tablet: (min-width: 600px, max-width: 1199px), desktop: (min-width: 1200px)) !default;
+
+$color-list: (red: #dd2018, blue: #4032ff, green: #379F1B) !default;
+$font-size-list: (2xs: .5em, xs: .625em, s: .75em, m: 1em, l: 1.25em, xl: 1.5em,  2xl: 1.75em, 3xl: 2em, 4xl: 2.25em) !default;
+$font-weight-list: (light: 300, regular: 400, medium: 500, semi-bold: 600, bold: 700) !default;
+$font-style-list: (normal: normal, italic: italic) !default;
+$font-family-list: (serif: '"Times New Roman", Times, serif', sans: 'Arial, Helvetica, sans-serif', mono: '"Courier New", Courier, monospace') !default;
+$line-height-list: (none: 1, s: 1.1, m: 1.21, l: 1.4, xl: 1.8, 2xl: 2.2) !default;
+
+$text-transform-list: (up: uppercase, low: lowercase, cap: capitalize, none: none) !default;
+$text-align-list: (left: left, right: right, center: center) !default;
+$letter-spacing-list: (s: -.02em, m: 0, l: .02em) !default;
+$hyphens-list: (auto: auto, none: none) !default;
+
+$pseudo-class-list: (before, after) !default;
+$pseudo-element-list: (hover, active) !default;
+
+$helper-list: (color: $color-list, font-size: $font-size-list, font-weight: $font-weight-list,
+        text-transform: $text-transform-list, text-align: $text-align-list, hyphens: $hyphens-list,
+        letter-spacing: $letter-spacing-list, font-style: $font-style-list, line-height: $line-height-list,
+        font-family: $font-family-list) !default;
+
+@function str-split($string, $separator) {
+    $split-arr: ();
+    $index : str-index($string, $separator);
+    @while $index != null {
+        $item: str-slice($string, 1, $index - 1);
+        $split-arr: append($split-arr, $item);
+        $string: str-slice($string, $index + 1);
+        $index : str-index($string, $separator);
+    }
+    $split-arr: append($split-arr, $string);
+
+    @return $split-arr;
+}
+
+@function list-slice($list, $start-index, $end-index) {
+    $sliced-list: ();
+    @for $i from 1 through length($list) {
+        @if ($i > $start-index) {
+            $sliced-list: append($sliced-list, nth($list, $i));
+        }
+
+        @if ($i == $end-index) {
+            @return $sliced-list;
+        }
+    }
+}
+
+@function selector_to_list($selector) {
+    @each $ampersand-parsed in $selector {
+        @return str-split(quote($ampersand-parsed), ' ');
+    }
+}
+
+@function selector_length($selector) {
+    @return length(selector_to_list($selector))
+}
+
+@mixin breakpoint-helper {
+    $breakpoint-aliases: map_keys($breakpoint-list);
+
+    @each $breakpoint-alias in $breakpoint-aliases {
+        &\@#{$breakpoint-alias} {
+            $breakpoint-data: map_get($breakpoint-list, $breakpoint-alias);
+            $min-width: if(map_has_key($breakpoint-data, min-width), '(min-width:' + map_get($breakpoint-data, min-width) + ')', '');
+            $max-width: if(map_has_key($breakpoint-data, max-width), '(max-width:' + map_get($breakpoint-data, max-width) + ')', '');
+            $media-query: $min-width + if(length($breakpoint-data) == 2, ' and ', '') + $max-width;
+
+            @media #{unquote($media-query)} {
+                @content;
+            }
+        }
+    }
+
+    @content;
+}
+
+@mixin pseudo-helper {
+    $selector: selector_to_list(&);
+    $sliced-selector: str_slice(nth($selector, length($selector)), 2);
+
+    @each $pseudo-element in $pseudo-element-list {
+        $generated-pseudo-class: $pseudo-element + \> + $sliced-selector;
+
+        @at-root #{append(list-slice($selector, 0, length($selector) - 1), '.' + quote($generated-pseudo-class))} {
+            &:#{$pseudo-element} {
+                cursor: pointer;
+                @content;
+            }
+        }
+    }
+
+    @each $pseudo-class in $pseudo-class-list {
+        $generated-pseudo-class: $pseudo-class + \>  + $sliced-selector;
+
+        @at-root #{append(list-slice($selector, 0, length($selector) - 1), '.' + quote($generated-pseudo-class))} {
+            &::#{$pseudo-class} {
+                content: attr(#{$pseudo-class}-content);
+                @content;
+            }
+        }
+    }
+
+    @content;
+}
+
+@mixin main-helper {
+    @include breakpoint-helper {
+        @include pseudo-helper {
+            @content;
+        }
+    }
+}
+
+@mixin get-helper ($helper-name) {
+    @if map_has_key($helper-list, $helper-name) {
+        $called-helper-list: map_get($helper-list, $helper-name);
+        $called-helper-aliases: map_keys($called-helper-list);
+
+        @each $called-helper-alias in $called-helper-aliases {
+            $alias-value: map_get($called-helper-list, $called-helper-alias);
+
+            .#{$helper-name}\(#{$called-helper-alias}\) {
+                @include main-helper {
+                    #{$helper-name}: #{$alias-value};
+                }
+            }
+        }
+    } @else {
+        @warn 'Helper ' + $helper-name + ' does not exist. Check its name, or create a new one.'
+    }
+}
+
+%helper-extension {
+    @include get-helper(color);
+    @include get-helper(font-size);
+    @include get-helper(font-weight);
+    @include get-helper(text-transform);
+    @include get-helper(text-align);
+    @include get-helper(hyphens);
+    @include get-helper(letter-spacing);
+    @include get-helper(font-style);
+    @include get-helper(line-height);
+    @include get-helper(font-family);
+}
+
+* {
+    @extend %helper-extension;
+}
